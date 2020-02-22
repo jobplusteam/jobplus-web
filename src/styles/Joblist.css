@@ -1,0 +1,63 @@
+.job-list {
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+
+}
+
+.job-list-item {
+    margin: 10px;
+    padding-right: 40px;
+    height: 700px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #888888;
+    max-width: 600px;
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+
+.job-list-item h2{
+    text-align: center;
+    margin-left: 40px;
+}
+
+.job-item {
+    height: auto;
+    width: auto;
+    padding: 1px;
+    list-style-type: none;
+    border-bottom: 1px solid gray;
+}
+.job-item .ant-list-item-meta{
+    text-align: left;
+
+}
+.job-item .ant-list-item-meta-content {
+    padding: 10px;
+}
+
+.job-item:last-child {
+    border-bottom:none;
+}
+
+.job-item .ant-list-item-meta-title {
+    margin-block-start: 0px;
+    margin-block-end: 5px;
+}
+.job-item .job-logo {
+    max-width: 50px;
+    max-height: 50px;
+    float: right;
+    text-align: center;
+}
+
+.job-item:hover {
+    cursor: pointer;
+    background-color: #e6f5fc;
+}
+
+.active {
+    background-color: #e6f5fc;
+}
