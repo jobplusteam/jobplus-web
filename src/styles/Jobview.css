@@ -1,0 +1,21 @@
+.job-view{
+    width: 100%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #888888;
+    max-height: 1000px;
+    padding: 80px;
+    font-size: 1.5em;
+    overflow-y: scroll;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.job-view .job-view-html {
+
+}
+
+.job-view .job-view-logo {
+    max-width: 150px;
+    max-height:150px;
+}
