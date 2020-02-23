@@ -1,7 +1,6 @@
 React Components Diagram
 ![3eGMRS.md.png](https://s2.ax1x.com/2020/02/20/3eGMRS.md.png)
 
-Test github commit from local master to remote branch
 ----
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
