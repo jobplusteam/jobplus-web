@@ -15,6 +15,7 @@ export const REGISTER_JOB_SELECTION = [
   <Option key="Lawyer"> Lawyer </Option>,
   <Option key="Human Resource"> Human Resource </Option>,
 ];
+
 export const jobdata = [
   {
     "id": "20d3176c-23fc-43b4-b5df-2fbbd657bd02",
