@@ -1,3 +1,21 @@
+import React from "react"
+import {Select} from "antd"
+const { Option } = Select;
+export const TEMP_API = 'https://around-179500.appspot.com';
+export const TOKEN_KEY = 'TOKEN';
+export const REGISTER_JOB_SELECTION = [
+  <Option key="Full-stack Engineer"> Full-stack Engineer </Option>,
+  <Option key="Account Executive"> Account Executive </Option>,
+  <Option key="Machine Learning Engineer"> Machine Learning Engineer </Option>,
+  <Option key="Software Engineer"> Software Engineer </Option>,
+  <Option key="Front-End Web Developer"> Front-End Web Developer </Option>,
+  <Option key="Algorithm Engineer"> Algorithm Engineer </Option>,
+  <Option key="Backend Web Developer"> Backend Web Developer </Option>,
+  <Option key="Python Developer"> Python Developer </Option>,
+  <Option key="Lawyer"> Lawyer </Option>,
+  <Option key="Human Resource"> Human Resource </Option>,
+];
+
 export const jobdata = [
   {
     "id": "20d3176c-23fc-43b4-b5df-2fbbd657bd02",
