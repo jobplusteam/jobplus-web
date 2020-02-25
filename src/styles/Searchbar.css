@@ -1,0 +1,9 @@
+.searchbar {
+    diaplay: flex;
+    width: 400px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-left: 400px;
+    justify-content: center;
+
+}
