@@ -12,18 +12,13 @@ class TabContainer extends React.Component {
         this.newTabIndex = 0;
         //this.onChange = this.onChange.bind(this);
         const panes = [
-            { title: 'Nearby Jobs', content: 'Nearby Jobs', key: '1', closable: false},
-            { title: 'Recommend Jobs', content: 'Recommend Jobs', key: '2', closable: false },
-            {
-                title: 'Search Jobs',
-                content: 'Content of Tab 3',
-                key: '3'
-            },
+            { title: 'Nearby', content: jobdata, key: '1', closable: false},
+            //{ title: 'Recommend Jobs', content: 'Recommend Jobs', key: '2', closable: false },
         ];
+
         this.state = {
             activeKey: panes[0].key,
-            tabName: panes[0].title,
-            panes,
+            panes
         };
     }
 
@@ -37,11 +32,14 @@ class TabContainer extends React.Component {
         this[action](targetKey);
     };
 
-    add = () => {
+    add = (passJobData) => {
         const { panes } = this.state;
         const activeKey = `newTab${this.newTabIndex++}`;
-        panes.push({ title: 'Search Jobs', content: 'Search Jobs', key: activeKey });
-        this.setState({ panes, activeKey });
+        panes.push({ title: 'Searched', key: activeKey, content: passJobData});
+        this.setState({
+                panes,
+                activeKey
+            });
     };
 
     remove = targetKey => {
@@ -63,8 +61,6 @@ class TabContainer extends React.Component {
         this.setState({ panes, activeKey });
     };
 
-
-
     render() {
         return (
           <div className="tab-container">
@@ -77,8 +73,8 @@ class TabContainer extends React.Component {
                 size={"large"}
             >
                 {this.state.panes.map(pane => (
-                    <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
-                        <Joblist tabName = {pane.title} jobData = {jobdata} />
+                    <TabPane tab={pane.title} key={pane.key} closable={pane.closable} >
+                        <Joblist tabName = {pane.title} jobData={pane.content} />
                     </TabPane>
                 ))}
             </Tabs>

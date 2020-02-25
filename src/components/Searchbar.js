@@ -17,8 +17,13 @@ class Searchbar extends Component {
     handleOnInputChange = ( event ) => {
         const query = event.target.value;
         this.setState( { query , loading : true, message : ' '})
-        this.props.handleSelectChange( query );
+
     }
+    handEnterPress = () => {
+        this.props.handleSelectChange(this.state.query);
+    }
+
+
 
     render() {
         const { query } = this.state;
@@ -28,7 +33,9 @@ class Searchbar extends Component {
                          value = { query }
                          size={"large"}
                          onChange={ this.handleOnInputChange }
+                         onPressEnter={this.handEnterPress}
                          enterButton />
+                {/*<button onClick={this.handEnterPress}>Search</button>*/}
             </div>
         );
     }
