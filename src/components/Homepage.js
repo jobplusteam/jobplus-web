@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import Searchbar from './Searchbar'
 
 class Homepage extends Component {
