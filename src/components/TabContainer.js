@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Tabs } from 'antd';
 import Joblist from './Joblist';
 import {jobdata} from '../constant';
-
+import '../styles/TabContainer.css'
 
 const { TabPane } = Tabs;
 
@@ -28,8 +28,7 @@ class TabContainer extends React.Component {
     }
 
     onChange = (activeKey) => {
-        this.setState({ activeKey: activeKey}
-        );
+        this.setState({ activeKey: activeKey});
         console.log(activeKey);
     };
 
@@ -68,11 +67,14 @@ class TabContainer extends React.Component {
 
     render() {
         return (
+          <div className="tab-container">
             <Tabs
                 onChange={this.onChange}
                 activeKey={this.state.activeKey}
                 type="editable-card"
                 onEdit={this.onEdit}
+                hideAdd={true}
+                size={"large"}
             >
                 {this.state.panes.map(pane => (
                     <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
@@ -80,6 +82,7 @@ class TabContainer extends React.Component {
                     </TabPane>
                 ))}
             </Tabs>
+          </div>
         );
     }
 }
