@@ -23,13 +23,12 @@ class Searchbar extends Component {
     render() {
         const { query } = this.state;
         return (
-            <div className="searchbar">
-
+            <div className="search-bar">
                 <Search  placeholder="search your dream job here"
                          value = { query }
+                         size={"large"}
                          onChange={ this.handleOnInputChange }
                          enterButton />
-
             </div>
         );
     }
