@@ -1,18 +1,23 @@
-.ant-input {
-    margin-left: 300px;
-    margin-bottom: 30px;
-
-    max-width: 500px;
-    display: flex;
-    horiz-align: center;
-}
 .search-bar {
-    margin: 30px auto 0px auto;
-    horiz-align: center;
+    display: flex;
+    margin: 30px auto 20px auto;
+    justify-content: center;
+}
+
+.job-location {
+    margin-left: 50px;
+}
+.job-description-input {
+    width: 350px;
+}
+.job-location-input {
+    width: 350px;
 }
 
 .searchButton {
-
-    margin-bottom: 30px;
-    horiz-align: center;
+    margin-left: 50px;
+    margin-top: 42px;
+    width: 100px;
+    height: 40px;
+    background-color: #61dafb;
 }

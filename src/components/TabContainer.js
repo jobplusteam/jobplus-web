@@ -10,11 +10,9 @@ class TabContainer extends React.Component {
     constructor(props) {
         super(props);
         this.newTabIndex = 0;
-        this.onChange = this.onChange.bind(this);
         const panes = [
-            { title: 'Nearby Jobs', content: jobdata, key: '1', closable: false},
-            //{ title: 'Recommend Jobs', content: 'Recommend Jobs', key: '2', closable: false }
-
+            { title: 'Nearby Jobs', content: this.props.nearbyJobData, key: '1', closable: false},
+            // { title: 'Recommend Jobs', content: 'Recommend Jobs', key: '2', closable: false }
         ];
         this.state = {
             activeKey: panes[0].key,
@@ -32,10 +30,10 @@ class TabContainer extends React.Component {
         this[action](targetKey);
     };
 
-    add = (passJobData) => {
+    add = (passedJobData) => {
         const { panes } = this.state;
         const activeKey = `newTab${this.newTabIndex++}`;
-        panes.push({ title: 'Searched', content: passJobData, key: activeKey });
+        panes.push({ title: 'Searched Tab', content: passedJobData, key: activeKey });
         this.setState({ panes, activeKey });
     };
 
@@ -57,8 +55,6 @@ class TabContainer extends React.Component {
         }
         this.setState({ panes, activeKey });
     };
-
-
 
     render() {
         return (

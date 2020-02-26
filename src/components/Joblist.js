@@ -11,7 +11,13 @@ import Jobview from "./Jobview"
  */
 class Joblist extends Component {
   state = {
-    item: ''
+    item: '',
+  }
+
+  constructor(props) {
+    super(props);
+    this.index = 1;
+
   }
 
   componentDidMount() {
@@ -24,34 +30,30 @@ class Joblist extends Component {
     const tab = this.props.tabName;
     const jobData = this.props.jobData;
     const datalist = [];
+    let index = 1;
     for (let i = 0; i < this.props.jobData.length; i++) {
-      datalist.push(
-        {
-          title: jobData[i].title,
-          logo: jobData[i].company_logo,
-          description: jobData[i].description,
-          company: jobData[i].company
-        }
-      )
+      datalist.push(jobData[i])
     }
     return (
-
       <div className="job-list">
         <div className="job-list-item">
-          <h2>{`${tab} Jobs`}</h2>
+          <h2>{tab}</h2>
           <List
             itemLayout="horizontal"
             dataSource={datalist}
             renderItem={item => (
               <List.Item
-                className="job-item"
-                onClick={() => {
+                id={index++}
+                className='job-item'
+                onClick={(event) => {
                   this.setState({
-                    item: item
-                  })
+                    item: item,
+                  });
+                  // const node = event.target;
+                  // node.className +=" active";
+                  // console.log(node);
                 }}>
                 <List.Item.Meta
-                  //avatar={<img className="job-logo" src={item.logo}/>}
                   title={item.title}
                   description={item.company}
                 />
