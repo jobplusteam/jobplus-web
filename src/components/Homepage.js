@@ -26,6 +26,9 @@ class Homepage extends Component {
     }
 
     state = {
+        jobDescription: '',
+        jobLocation: '',
+        fullTime: 'false',
         loadingGeolocation: false,
         error: null,
         nearbyJobData: '',
@@ -89,29 +92,38 @@ class Homepage extends Component {
         })
     }
 
-    componentDidMount() {
-        this.getGeolocation();
-    }
-
     // searchBar callback function
-
     handleSelectChange = (jobDescription, jobLocation) => {
         console.log(jobDescription);
         console.log(jobLocation);
+        this.setState({
+           jobDescription: jobDescription,
+           jobLocation: jobLocation
+        });
         this.callAddTab.current.add(this.state.searchedJobData);
         //this.fetchSearchResult( query );
     }
     //Filter callback function
-    handleFilterChange = (filterKeyWord) => {
-        console.log(filterKeyWord)
+    handleFilterChange = (fullTimeOrNot) => {
+        console.log(fullTimeOrNot);
+        this.setState({
+            fullTime: fullTimeOrNot
+        });
+    }
+
+    componentWillMount() {
+        this.getGeolocation();
+        this.setState({
+            nearbyJobData: jobdata
+        });
     }
 
     render() {
         return (
             <div>
                 <Searchbar handleSelectChange={this.handleSelectChange}/>
-                <Filter/>
-                <TabContainer ref={this.callAddTab}/>
+                <Filter handleFilterSelect={this.handleFilterChange}/>
+                <TabContainer ref={this.callAddTab} nearbyJobData={this.state.nearbyJobData}/>
             </div>
         );
     }

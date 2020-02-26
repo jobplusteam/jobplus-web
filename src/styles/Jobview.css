@@ -11,11 +11,27 @@
     margin: 10px;
 }
 
+.job-view h2 {
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 1px;
+    /*border-bottom: 1px solid gray;*/
+}
+
+.job-view .job-view-location {
+}
+.job-view .job-view-jobtype {
+    margin-right: 100px;
+}
+
 .job-view .job-view-html {
 
 }
 
 .job-view .job-view-logo {
+    margin-top: 20px;
     max-width: 150px;
     max-height:150px;
+    float: right;
 }

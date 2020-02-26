@@ -33,18 +33,26 @@ class Searchbar extends Component {
         const { jobLocation } = this.state;
         return (
             <div className="search-bar">
-                <Input  placeholder="input job title"
-                         value = { jobDescription }
-                         size={"large"}
-                         onChange={ this.handleDescriptionChange }
-                         />
-
-                <Input  placeholder="input location"
-                         value = { jobLocation }
-                         size={"large"}
-                         onChange={ this.handleLocationChange}
-                         />
-
+                <div className="job-description">
+                    <h2>Job Description</h2>
+                    <Input  placeholder="Filter by title or company"
+                            className="job-description-input"
+                            value = { jobDescription }
+                            size={"large"}
+                            onChange={ this.handleDescriptionChange }
+                            onPressEnter={this.onPressEnter}
+                    />
+                </div>
+                <div className="job-location">
+                    <h2>Job Location</h2>
+                    <Input  placeholder="Filter by city, state, zip code or country"
+                            className="job-location-input"
+                            value = { jobLocation }
+                            size={"large"}
+                            onChange={ this.handleLocationChange}
+                            onPressEnter={this.onPressEnter}
+                    />
+                </div>
                 <button className="searchButton" onClick={this.onPressEnter}>Search</button>
             </div>
         );
