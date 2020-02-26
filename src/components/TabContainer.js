@@ -10,19 +10,14 @@ class TabContainer extends React.Component {
     constructor(props) {
         super(props);
         this.newTabIndex = 0;
-        //this.onChange = this.onChange.bind(this);
+        this.onChange = this.onChange.bind(this);
         const panes = [
-            { title: 'Nearby Jobs', content: 'Nearby Jobs', key: '1', closable: false},
-            { title: 'Recommend Jobs', content: 'Recommend Jobs', key: '2', closable: false },
-            {
-                title: 'Search Jobs',
-                content: 'Content of Tab 3',
-                key: '3'
-            },
+            { title: 'Nearby Jobs', content: jobdata, key: '1', closable: false},
+            //{ title: 'Recommend Jobs', content: 'Recommend Jobs', key: '2', closable: false }
+
         ];
         this.state = {
             activeKey: panes[0].key,
-            tabName: panes[0].title,
             panes,
         };
     }
@@ -37,10 +32,10 @@ class TabContainer extends React.Component {
         this[action](targetKey);
     };
 
-    add = () => {
+    add = (passJobData) => {
         const { panes } = this.state;
         const activeKey = `newTab${this.newTabIndex++}`;
-        panes.push({ title: 'Search Jobs', content: 'Search Jobs', key: activeKey });
+        panes.push({ title: 'Searched', content: passJobData, key: activeKey });
         this.setState({ panes, activeKey });
     };
 
@@ -78,7 +73,7 @@ class TabContainer extends React.Component {
             >
                 {this.state.panes.map(pane => (
                     <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
-                        <Joblist tabName = {pane.title} jobData = {jobdata} />
+                        <Joblist tabName = {pane.title} jobData = {pane.content} />
                     </TabPane>
                 ))}
             </Tabs>
@@ -86,5 +81,6 @@ class TabContainer extends React.Component {
         );
     }
 }
+
 
 export default TabContainer;
