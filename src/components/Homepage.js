@@ -45,19 +45,21 @@ class Homepage extends Component{
   //     });
   // }
     // searchBar callback function
-    handleSelectChange = (query) => {
-        console.log(query)
+    handleSelectChange = (jobDescription, jobLocation) => {
+        console.log(jobDescription);
+        console.log(jobLocation);
         //this.fetchSearchResult( query );
     }
     //Filter callback function
-    handleFilterChange = (filterKeyWord) => {
-      console.log(filterKeyWord)
-    }
+    // handleFilterChange = (filterKeyWord) => {
+    //   console.log(filterKeyWord)
+    // }
+
 
   render() {
     return (
         <div>
-            <Searchbar handleSelectChange={this.handleSelectChange} />
+            <Searchbar handleSelectChange={this.handleSelectChange()} />
             <Filter />
             <TabContainer />
         </div>
