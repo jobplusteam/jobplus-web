@@ -1,4 +1,18 @@
+.ant-input {
+    margin-left: 300px;
+    margin-bottom: 30px;
+
+    max-width: 500px;
+    display: flex;
+    horiz-align: center;
+}
 .search-bar {
     margin: 30px auto 0px auto;
-    width: 600px;
+    horiz-align: center;
+}
+
+.searchButton {
+
+    margin-bottom: 30px;
+    horiz-align: center;
 }

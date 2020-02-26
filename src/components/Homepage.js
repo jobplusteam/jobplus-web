@@ -94,13 +94,12 @@ class Homepage extends Component {
     }
 
     // searchBar callback function
-    handleSelectChange = (query) => {
-        console.log(query);
-        this.setState({
-            searchAction: true
-        });
+
+    handleSelectChange = (jobDescription, jobLocation) => {
+        console.log(jobDescription);
+        console.log(jobLocation);
         this.callAddTab.current.add(this.state.searchedJobData);
-        //this.fetchSearchResult(query);
+        //this.fetchSearchResult( query );
     }
     //Filter callback function
     handleFilterChange = (filterKeyWord) => {
