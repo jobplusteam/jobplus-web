@@ -2,33 +2,50 @@ import React, {Component} from 'react';
 import { Input } from 'antd';
 import '../styles/Searchbar.css';
 
-const { Search } = Input;
 
 class Searchbar extends Component {
     constructor( props) {
         super( props );
         this.state = {
-            query: '',
+            jobDescription: '',
+            jobLocation: '',
             result: {},
             loading: false,
             message: ""
         }
     }
-    handleOnInputChange = ( event ) => {
-        const query = event.target.value;
-        this.setState( { query , loading : true, message : ' '})
-        this.props.handleSelectChange( query );
+    handleDescriptionChange = ( event ) => {
+        const jobDescription = event.target.value;
+        this.setState( { jobDescription , loading : true, message : ' '})
+
     }
 
+    handleLocationChange = ( event ) => {
+        const jobLocation = event.target.value;
+        this.setState( { jobLocation , loading : true, message : ' '})
+    }
+
+    onPressEnter = () => {
+        this.props.handleSelectChange(this.state.jobDescription, this.state.jobLocation);
+    }
     render() {
-        const { query } = this.state;
+        const { jobDescription } = this.state;
+        const { jobLocation } = this.state;
         return (
             <div className="search-bar">
-                <Search  placeholder="search your dream job here"
-                         value = { query }
+                <Input  placeholder="input job title"
+                         value = { jobDescription }
                          size={"large"}
-                         onChange={ this.handleOnInputChange }
-                         enterButton />
+                         onChange={ this.handleDescriptionChange }
+                         />
+
+                <Input  placeholder="input location"
+                         value = { jobLocation }
+                         size={"large"}
+                         onChange={ this.handleLocationChange}
+                         />
+
+                <button className="searchButton" onClick={this.onPressEnter}>Search</button>
             </div>
         );
     }
