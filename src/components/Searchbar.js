@@ -7,26 +7,31 @@ class Searchbar extends Component {
     constructor( props) {
         super( props );
         this.state = {
+            loading: false,
             jobDescription: '',
             jobLocation: '',
             result: {},
-            loading: false,
-            message: ""
         }
     }
     handleDescriptionChange = ( event ) => {
-        const jobDescription = event.target.value;
-        this.setState( { jobDescription , loading : true, message : ' '})
-
+        const description = event.target.value;
+        this.setState((prevState, props) => {
+            return {
+                jobDescription: description
+            }
+        })
+        this.props.handleSelectChange(description);
     }
 
     handleLocationChange = ( event ) => {
-        const jobLocation = event.target.value;
-        this.setState( { jobLocation , loading : true, message : ' '})
+        const location = event.target.value;
+        this.setState( {
+            jobLocation: location});
+        this.props.handleLocationChange(location);
     }
 
     onPressEnter = () => {
-        this.props.handleSelectChange(this.state.jobDescription, this.state.jobLocation);
+        this.props.handleSearchPress();
     }
     render() {
         const { jobDescription } = this.state;
@@ -39,7 +44,7 @@ class Searchbar extends Component {
                             className="job-description-input"
                             value = { jobDescription }
                             size={"large"}
-                            onChange={ this.handleDescriptionChange }
+                            onChange={this.handleDescriptionChange}
                             onPressEnter={this.onPressEnter}
                     />
                 </div>
