@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {List} from 'antd';
 import "../styles/Joblist.css";
 import Jobview from "./Jobview"
+import {INIT_DATA} from "../constant";
 
 /**
  * props needed:
@@ -11,7 +12,8 @@ import Jobview from "./Jobview"
  */
 class Joblist extends Component {
   state = {
-    item: '',
+      item: INIT_DATA,
+      hasData: false
   }
 
   constructor(props) {
@@ -21,9 +23,12 @@ class Joblist extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      item: this.props.jobData[0]
-    })
+      console.log(this.props.jobData)
+      if (this.props.jobData) {
+          this.setState({
+              item: this.props.jobData[0]
+          })
+      }
   }
 
   render() {
@@ -31,8 +36,10 @@ class Joblist extends Component {
     const jobData = this.props.jobData;
     const datalist = [];
     let index = 1;
-    for (let i = 0; i < this.props.jobData.length; i++) {
-      datalist.push(jobData[i])
+    if (this.props.jobData.length > 0) {
+        for (let i = 0; i < this.props.jobData.length; i++) {
+            datalist.push(jobData[i])
+        }
     }
     return (
       <div className="job-list">
@@ -61,9 +68,8 @@ class Joblist extends Component {
             )}
           />
         </div>
-        <Jobview jobItem={this.state.item}/>
+        <Jobview jobItem={this.state.item} noData={this.props.jobData.length === 0 || this.props.jobData[0].id === ""}/>
       </div>
-
     );
   }
 }
