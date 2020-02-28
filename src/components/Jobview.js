@@ -5,7 +5,7 @@ import {INIT_DATA} from "../constant";
 class Jobview extends Component {
   render() {
     const item = this.props.jobItem;
-    console.log(item);
+    //console.log(item);
 
     if (this.props.noData) {
         return (<div className="job-loading">No Searched Job!!!</div>);

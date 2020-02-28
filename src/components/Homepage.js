@@ -37,7 +37,8 @@ class Homepage extends Component {
         searchedJobData: INIT_DATA,
         isLoadingNearby: true,
         isLoadingSearched: true,
-        isSearched: false
+        isSearched: false,
+        message: "Fetching Job Data..."
     }
 
     fetchNearbyResult = (url_method) => {
@@ -87,6 +88,9 @@ class Homepage extends Component {
                }
            }).catch((e) => {
                console.log(e.message);
+               this.setState({
+                   message: "Fail to fetch data!"
+               })
             });
         }
 
@@ -146,7 +150,8 @@ class Homepage extends Component {
         this.fetchNearbyResult(SEARCH);
         this.fetchNearbyResult(NEARBY);
         this.setState({
-            isSearched: true
+            isSearched: true,
+            message: "Fetching Job Data..."
         })
     }
 
@@ -161,6 +166,12 @@ class Homepage extends Component {
     componentDidMount() {
         this.getGeolocation();
         this.fetchNearbyResult(SEARCH);
+        setTimeout(() => {
+            this.setState({
+                message: "Failed to fetch job data! Please Refresh the Page!"
+            });
+            //console.log(this.props.message)
+        }, 8000)
     }
 
     render() {
@@ -172,7 +183,7 @@ class Homepage extends Component {
                     handleSearchPress={this.handleSearchPress}/>
                 <Filter handleFilterSelect={this.handleFilterChange}/>
                 {this.state.isLoadingNearby || this.state.isLoadingSearched ?
-                    <Loading />
+                    <Loading message={this.state.message}/>
                     :
                     <TabContainer
                         ref={this.callAddTab}
