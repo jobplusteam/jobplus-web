@@ -12,7 +12,7 @@
     border-width: 1px;
     border-color: #178fff;
     width: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 
 }
 

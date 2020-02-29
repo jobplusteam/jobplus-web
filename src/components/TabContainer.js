@@ -8,11 +8,6 @@ const { TabPane } = Tabs;
 class TabContainer extends React.Component {
 
     state = {
-        // panes: [
-        //     { title: 'Nearby Jobs', content: this.props.nearbyJobData, key: '1', closable: false},
-        //     { title: 'Recommend Jobs', content: this.props.searchedJobData, key: '3', closable: false},
-        //     { title: 'Searched Jobs', content: this.props.searchedJobData, key: '2', closable: false}
-        // ],
         activeKey: '1'
     }
 
@@ -31,6 +26,7 @@ class TabContainer extends React.Component {
     }
 
     render() {
+        console.log(this.props.nearbyJobData)
         return (
           <div className="tab-container">
               <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey}>
@@ -44,19 +40,6 @@ class TabContainer extends React.Component {
                       <Joblist tabName = "Searched Jobs" jobData = {this.props.searchedJobData} />
                   </TabPane>
               </Tabs>
-            {/*<Tabs*/}
-            {/*    onChange={this.onChange}*/}
-            {/*    activeKey={this.state.activeKey}*/}
-            {/*    type="editable-card"*/}
-            {/*    onEdit={this.onEdit}*/}
-            {/*    hideAdd={true}*/}
-            {/*>*/}
-            {/*    {this.state.panes.map(pane => (*/}
-            {/*        <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>*/}
-            {/*            <Joblist tabName = {pane.title} jobData = {pane.content} />*/}
-            {/*        </TabPane>*/}
-            {/*    ))}*/}
-            {/*</Tabs>*/}
           </div>
         );
     }

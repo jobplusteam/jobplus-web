@@ -8,7 +8,7 @@ class Jobview extends Component {
     //console.log(item);
 
     if (this.props.noData) {
-        return (<div className="job-loading">No Searched Job!!!</div>);
+        return (<div className="job-loading">No job data! Please try again!</div>);
     }
     return (
         <div className="job-view">
