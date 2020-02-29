@@ -183,7 +183,7 @@ class Homepage extends Component {
                     handleSearchPress={this.handleSearchPress}/>
                 <Filter handleFilterSelect={this.handleFilterChange}/>
                 {this.state.isLoadingNearby || this.state.isLoadingSearched ?
-                    <Loading message={this.state.message}/>
+                    <Loading message={this.state.message} isSearched={this.state.isSearched}/>
                     :
                     <TabContainer
                         ref={this.callAddTab}
