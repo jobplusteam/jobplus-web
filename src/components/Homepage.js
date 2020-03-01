@@ -21,179 +21,178 @@ import Loading from "./Loading";
  */
 
 class Homepage extends Component {
-    constructor(props) {
-        super(props);
-        this.callAddTab = React.createRef();
-    }
+  constructor(props) {
+    super(props);
+    this.callAddTab = React.createRef();
+  }
 
-    state = {
-        jobDescription: '',
-        jobLocation: '',
-        fullTime: 'false',
+  state = {
+    jobDescription: '',
+    jobLocation: '',
+    fullTime: 'false',
+    loadingGeolocation: false,
+    error: null,
+    nearbyJobData: INIT_DATA,
+    recommendJobData: INIT_DATA,
+    searchedJobData: INIT_DATA,
+    isLoading: false,
+    isSearched: false,
+    message: "Fetching Job Data..."
+  }
+
+  fetchNearbyResult = (url_method) => {
+    this.setState({
+      isLoadingNearby: true,
+      isLoadingSearched: true,
+      isLoading: true
+    })
+    const method = url_method;
+    let stateKey;
+    let url;
+    const position = JSON.parse(localStorage.getItem(POSITION_KEY));
+    switch (method) {
+      case NEARBY:
+        stateKey = "nearbyJobData";
+        url = `${URL_HOST}${method}?lat=${position.latitude}&lon=${position.longitude}`;
+        break;
+      case SEARCH:
+        stateKey = "searchedJobData";
+        url = `${URL_HOST}${method}?description=${this.state.jobDescription}&location=${this.state.jobLocation}&full_time=${this.state.fullTime}`;
+        break;
+      default:
+        stateKey = "nearbyJobData";
+    }
+    fetch(url, {
+      method: 'GET',
+      headers: {},
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Failed to load nearby search');
+    }).then((data) => {
+      console.log(url);
+      console.log(data);
+      if (url_method === SEARCH) {
+        this.setState({
+          isLoadingSearched: false,
+          isLoading: false,
+          searchedJobData: data.length !== 0 ? data : INIT_DATA
+
+        });
+      } else if (url_method === NEARBY) {
+        this.setState({
+          isLoadingNearby: false,
+          isLoading: false,
+          nearbyJobData: data.length !== 0 ? data : INIT_DATA
+        });
+      }
+    }).catch((e) => {
+      console.log(e.message);
+      this.setState({
+        message: "Fail to fetch data!"
+      })
+    });
+  }
+
+  getGeolocation() {
+    this.setState({
+      loadingGeolocation: true,
+      error: null,
+    });
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        this.onGeolocationSuccess,
+        this.onGeolocationFailure,
+        GEOLOCATION_OPTIONS,
+      );
+    } else {
+      this.setState({
         loadingGeolocation: false,
-        error: null,
-        nearbyJobData: INIT_DATA,
-        recommendJobData: INIT_DATA,
-        searchedJobData: INIT_DATA,
-        isLoadingNearby: true,
-        isLoadingSearched: true,
-        isSearched: false,
-        message: "Fetching Job Data..."
+        error: 'Your browser does not support geolocation.',
+      });
     }
+  }
 
-    fetchNearbyResult = (url_method) => {
+  onGeolocationSuccess = (position) => {
+    this.setState({
+      loadingGeolocation: false,
+      error: null,
+    })
+    console.log(position);
+    const {latitude, longitude} = position.coords;
+    localStorage.setItem(POSITION_KEY, JSON.stringify({latitude, longitude}));
+    //this.fetchNearbyResult(NEARBY);
+  }
+
+  onGeolocationFailure = () => {
+    this.setState({
+      loadingGeolocation: false,
+      error: 'Failed to load geolocation.',
+    })
+  }
+
+  // searchBar callback function
+  handleSelectChange = (jobDescription) => {
+    this.setState({
+      jobDescription: jobDescription
+    });
+  }
+
+  handleLocationChange = (jobLocation) => {
+    this.setState({
+      jobLocation: jobLocation
+    });
+  }
+
+  handleSearchPress = () => {
+    this.fetchNearbyResult(SEARCH);
+    //this.fetchNearbyResult(NEARBY);
+    this.setState({
+      isSearched: true,
+      message: "Fetching Job Data..."
+    })
+  }
+
+  //Filter callback function
+  handleFilterChange = (fullTimeOrNot) => {
+    console.log(fullTimeOrNot);
+    this.setState({
+      fullTime: fullTimeOrNot
+    });
+  }
+
+  //fetch nearby data and recommend data when user logged in
+  componentDidMount() {
+    this.getGeolocation();
+    this.fetchNearbyResult(NEARBY);
+    this.fetchNearbyResult(SEARCH);
+    setTimeout(() => {
         this.setState({
-            isLoadingNearby: true,
-            isLoadingSearched: true
-        })
-        const method = url_method;
-        let stateKey;
-        let url;
-        const position = JSON.parse(localStorage.getItem(POSITION_KEY));
-        switch (method) {
-            case NEARBY:
-                stateKey = "nearbyJobData";
-                url = `${URL_HOST}${method}?lat=${position.latitude}&lon=${position.longitude}`;
-                break;
-            case SEARCH:
-                stateKey = "searchedJobData";
-                url = `${URL_HOST}${method}?description=${this.state.jobDescription}&location=${this.state.jobLocation}&full_time=${this.state.fullTime}`;
-                break;
-            default:
-                stateKey = "nearbyJobData";
-        }
-           fetch(url, {
-               method: 'GET',
-               headers: {
-               },
-           }).then((response) => {
-               if (response.ok) {
-                   return response.json();
-               }
-               throw new Error('Failed to load nearby search');
-           }).then((data) => {
-               console.log(url);
-               console.log(data);
-               if (url_method === SEARCH) {
-                   this.setState({
-                       isLoadingSearched: false,
-                       searchedJobData: data.length !== 0 ? data : INIT_DATA
-
-                   });
-               } else if (url_method === NEARBY) {
-                   this.setState({
-                       isLoadingNearby: false,
-                       nearbyJobData: data.length !== 0 ? data : INIT_DATA
-                   });
-               }
-           }).catch((e) => {
-               console.log(e.message);
-               this.setState({
-                   message: "Fail to fetch data!"
-               })
-            });
-        }
-
-    getGeolocation() {
-        this.setState({
-            loadingGeolocation: true,
-            error: null,
+            message: "Failed to fetch job data! Please Refresh the Page!"
         });
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                this.onGeolocationSuccess,
-                this.onGeolocationFailure,
-                GEOLOCATION_OPTIONS,
-            );
-        } else {
-            this.setState({
-                loadingGeolocation: false,
-                error: 'Your browser does not support geolocation.',
-            });
-        }
-    }
+        //console.log(this.props.message)
+    }, 5000)
+  }
 
-    onGeolocationSuccess = (position) => {
-        this.setState({
-            loadingGeolocation: false,
-            error: null,
-        })
-        console.log(position);
-        const { latitude, longitude } = position.coords;
-        localStorage.setItem(POSITION_KEY, JSON.stringify({ latitude, longitude }));
-        this.fetchNearbyResult(NEARBY);
-    }
-
-    onGeolocationFailure = () => {
-        this.setState({
-            loadingGeolocation: false,
-            error: 'Failed to load geolocation.',
-        })
-    }
-
-    // searchBar callback function
-    handleSelectChange = (jobDescription) => {
-        //console.log(jobDescription);
-        this.setState({
-           jobDescription: jobDescription
-        });
-    }
-
-    handleLocationChange = (jobLocation) => {
-        //console.log(jobLocation)
-        this.setState({
-            jobLocation: jobLocation
-        });
-    }
-
-    handleSearchPress = () => {
-        this.fetchNearbyResult(SEARCH);
-        this.fetchNearbyResult(NEARBY);
-        this.setState({
-            isSearched: true,
-            message: "Fetching Job Data..."
-        })
-    }
-
-    //Filter callback function
-    handleFilterChange = (fullTimeOrNot) => {
-        console.log(fullTimeOrNot);
-        this.setState({
-            fullTime: fullTimeOrNot
-        });
-    }
-    //fetch nearby data and recommend data when user logged in
-    componentDidMount() {
-        this.getGeolocation();
-        this.fetchNearbyResult(SEARCH);
-        setTimeout(() => {
-            this.setState({
-                message: "Failed to fetch job data! Please Refresh the Page!"
-            });
-            //console.log(this.props.message)
-        }, 8000)
-    }
-
-    render() {
-        return (
-            <div>
-                <Searchbar
-                    handleSelectChange={this.handleSelectChange}
-                    handleLocationChange={this.handleLocationChange}
-                    handleSearchPress={this.handleSearchPress}/>
-                <Filter handleFilterSelect={this.handleFilterChange}/>
-                {this.state.isLoadingNearby || this.state.isLoadingSearched ?
-                    <Loading message={this.state.message} isSearched={this.state.isSearched}/>
-                    :
-                    <TabContainer
-                        ref={this.callAddTab}
-                        nearbyJobData={this.state.nearbyJobData}
-                        searchedJobData={this.state.searchedJobData}
-                        isSearched={this.state.isSearched}/>
-                }
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <Searchbar
+          handleSelectChange={this.handleSelectChange}
+          handleLocationChange={this.handleLocationChange}
+          handleSearchPress={this.handleSearchPress}/>
+        <Filter handleFilterSelect={this.handleFilterChange}/>
+        {this.state.isLoading ?
+          <Loading message={this.state.message} isSearched={this.state.isSearched}/>
+          :
+          <TabContainer
+            nearbyJobData={this.state.nearbyJobData}
+            searchedJobData={this.state.searchedJobData}
+            isSearched={this.state.isSearched}/>}
+      </div>
+    );
+  }
 }
 
 export default Homepage;
