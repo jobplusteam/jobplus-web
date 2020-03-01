@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {List} from 'antd';
 import "../styles/Joblist.css";
 import Jobview from "./Jobview"
-import {INIT_DATA} from "../constant";
 
 /**
  * props needed:
@@ -12,8 +11,8 @@ import {INIT_DATA} from "../constant";
  */
 class Joblist extends Component {
   state = {
-      item: INIT_DATA,
-      hasData: false
+    item: this.props.jobData,
+    hasData: false
   }
 
   constructor(props) {
@@ -23,23 +22,32 @@ class Joblist extends Component {
   }
 
   componentDidMount() {
-      console.log(this.props.jobData)
-      if (this.props.jobData) {
-          this.setState({
-              item: this.props.jobData[0]
-          })
-      }
+    this.setState({
+      item: this.props.jobData[0]
+    })
+    //console.log(this.props.jobData);
   }
 
+  componentWillReceiveProps() {
+    setTimeout(() => {
+      this.setState({
+        item: this.props.jobData[0]
+      })
+    }, 1)
+  }
+
+
   render() {
+    //console.log(this.props.jobData)
     const tab = this.props.tabName;
     const jobData = this.props.jobData;
     const datalist = [];
     let index = 1;
+    console.log(this.props.jobData.length);
     if (this.props.jobData.length > 0) {
-        for (let i = 0; i < this.props.jobData.length; i++) {
-            datalist.push(jobData[i])
-        }
+      for (let i = 0; i < this.props.jobData.length; i++) {
+        datalist.push(jobData[i])
+      }
     }
     return (
       <div className="job-list">

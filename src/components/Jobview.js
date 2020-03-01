@@ -3,7 +3,9 @@ import "../styles/Jobview.css"
 import {INIT_DATA} from "../constant";
 
 class Jobview extends Component {
+
   render() {
+    console.log(this.props.jobItem);
     const item = this.props.jobItem;
     //console.log(item);
 
