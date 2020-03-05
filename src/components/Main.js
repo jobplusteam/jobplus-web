@@ -9,7 +9,7 @@ import '../styles/Login.css'
 class Main extends Component {
 
   getHome = () => {
-    return this.props.isLoggedIn ? <Homepage /> : <Redirect to="/login" />;
+    return <Homepage isLoggedIn={this.props.isLoggedIn}/>;
   }
 
   getLogin = () => {
@@ -30,9 +30,9 @@ class Main extends Component {
           <Switch>
             <Route path="/login" render={this.getLogin} />
             <Route path="/register" component={Register} />
-            <Route path="/home" component={Homepage} />
+            <Route path="/home" component={this.getHome} />
             <Route path="/myprofile" component={this.getProfile} />
-            <Route component={Homepage} />
+            <Route component={this.getHome} />
           </Switch>
         </div>
     );

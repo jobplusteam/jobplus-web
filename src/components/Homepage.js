@@ -164,6 +164,7 @@ class Homepage extends Component {
 
   //fetch nearby data and recommend data when user logged in
   componentDidMount() {
+    console.log("isLoggedIn:", this.props.isLoggedIn);
     this.getGeolocation();
     this.fetchNearbyResult(NEARBY);
     this.fetchNearbyResult(SEARCH);
@@ -189,7 +190,10 @@ class Homepage extends Component {
           <TabContainer
             nearbyJobData={this.state.nearbyJobData}
             searchedJobData={this.state.searchedJobData}
-            isSearched={this.state.isSearched}/>}
+            isSearched={this.state.isSearched}
+            isLoggedIn={this.props.isLoggedIn}
+          />
+        }
       </div>
     );
   }
