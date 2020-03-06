@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {TEMP_API} from "../constant"
+import {TEMP_API, URL_HOST} from "../constant"
 import '../styles/Login.css';
 import { Form, Icon, Input, Button, message } from 'antd';
 

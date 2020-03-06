@@ -47,3 +47,7 @@
     max-height:150px;
     float: right;
 }
+
+.save-button {
+    margin-right: 30px;
+}
