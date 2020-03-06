@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {TEMP_API, URL_HOST} from "../constant"
+import {Link} from 'react-router-dom';
+import {URL_HOST} from "../constant"
 import '../styles/Login.css';
 import { Form, Icon, Input, Button, message } from 'antd';
 
@@ -11,10 +11,10 @@ class  NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        fetch(`${TEMP_API}/login`, {
+        fetch(`${URL_HOST}/login`, {
           method: 'POST',
           body: JSON.stringify({
-            username: values.username,
+            user_id: values.username,
             password: values.password,
           }),
         }).then((response) => {

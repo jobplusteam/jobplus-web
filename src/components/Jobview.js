@@ -22,7 +22,7 @@ class Jobview extends Component {
   }
 
   render() {
-    console.log(this.props.jobItem);
+    //console.log(this.props.jobItem);
     const item = this.props.jobItem;
     //console.log(item);
     //console.log("isLoggedIn:", this.props.isLoggedIn);
@@ -40,10 +40,10 @@ class Jobview extends Component {
             {
               this.props.isLoggedIn ?
                 <div>
-                  <Button type="primary" htmlType="submit" ghost={this.state.isSaved ? false : true} onClick={this.handleClickSave} className="save-button" >
+                  <Button type="primary" htmlType="submit" ghost={!this.state.isSaved} onClick={this.handleClickSave} className="save-button" >
                     {this.state.isSaved ? "Saved" : "Save"}
                   </Button>
-                  <Button type="primary" htmlType="submit" ghost={this.state.isApplied ? false : true} onClick={this.handleClickApply} className="apply-button">
+                  <Button type="primary" htmlType="submit" ghost={!this.state.isApplied} onClick={this.handleClickApply} className="apply-button">
                     {this.state.isApplied ? "Applied" : "Apply"}
                   </Button>
                 </div> :
