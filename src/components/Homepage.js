@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
-import {GEOLOCATION_OPTIONS, POSITION_KEY, INIT_DATA} from "../constant";
-
 import Searchbar from './Searchbar'
 import Filter from "./Filter"
 import TabContainer from "./TabContainer"
-import {URL_HOST, NEARBY, SEARCH} from '../constant';
 import Loading from "./Loading";
+import {
+  GEOLOCATION_OPTIONS,
+  POSITION_KEY,
+  INIT_DATA,
+  URL_HOST,
+  NEARBY,
+  SEARCH,
+  RECOMMEND} from "../constant";
 
 /**
  *   1. data from children: (searchBar and filter need callback function from homepage)
@@ -42,8 +47,6 @@ class Homepage extends Component {
 
   fetchNearbyResult = (url_method) => {
     this.setState({
-      isLoadingNearby: true,
-      isLoadingSearched: true,
       isLoading: true
     })
     const method = url_method;
@@ -78,7 +81,6 @@ class Homepage extends Component {
           isLoadingSearched: false,
           isLoading: false,
           searchedJobData: data.length !== 0 ? data : INIT_DATA
-
         });
       } else if (url_method === NEARBY) {
         this.setState({
@@ -147,7 +149,6 @@ class Homepage extends Component {
 
   handleSearchPress = () => {
     this.fetchNearbyResult(SEARCH);
-    //this.fetchNearbyResult(NEARBY);
     this.setState({
       isSearched: true,
       message: "Fetching Job Data..."
@@ -167,6 +168,9 @@ class Homepage extends Component {
     this.getGeolocation();
     this.fetchNearbyResult(NEARBY);
     this.fetchNearbyResult(SEARCH);
+    if (this.props.isLoggedIn) {
+      this.fetchNearbyResult(RECOMMEND);
+    }
     setTimeout(() => {
         this.setState({
             message: "Failed to fetch job data! Please Refresh the Page!"
@@ -184,12 +188,15 @@ class Homepage extends Component {
           handleSearchPress={this.handleSearchPress}/>
         <Filter handleFilterSelect={this.handleFilterChange}/>
         {this.state.isLoading ?
-          <Loading message={this.state.message} isSearched={this.state.isSearched}/>
+          <Loading message={this.state.message}
+                   isSearched={this.state.isSearched}
+                   isLoggedIn={this.props.isLoggedIn}/>
           :
           <TabContainer
             nearbyJobData={this.state.nearbyJobData}
             searchedJobData={this.state.searchedJobData}
-            isSearched={this.state.isSearched}/>}
+            isSearched={this.state.isSearched}
+            isLoggedIn={this.props.isLoggedIn}/>}
       </div>
     );
   }
