@@ -165,6 +165,7 @@ class Homepage extends Component {
 
   //fetch nearby data and recommend data when user logged in
   componentDidMount() {
+    console.log("isLoggedIn:", this.props.isLoggedIn);
     this.getGeolocation();
     this.fetchNearbyResult(NEARBY);
     this.fetchNearbyResult(SEARCH);
