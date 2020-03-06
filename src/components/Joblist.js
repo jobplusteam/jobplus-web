@@ -43,7 +43,6 @@ class Joblist extends Component {
     const jobData = this.props.jobData;
     const datalist = [];
     let index = 1;
-    console.log(this.props.jobData.length);
     if (this.props.jobData.length > 0) {
       for (let i = 0; i < this.props.jobData.length; i++) {
         datalist.push(jobData[i])
