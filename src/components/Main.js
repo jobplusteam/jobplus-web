@@ -31,7 +31,7 @@ class Main extends Component {
             <Route path="/login" render={this.getLogin} />
             <Route path="/register" component={Register} />
             <Route path="/home" component={Homepage} />
-            <Route path="/myprofile" component={this.getProfile} />
+            <Route path="/myprofile" render={this.getProfile} />
             <Route component={Homepage} />
           </Switch>
         </div>
