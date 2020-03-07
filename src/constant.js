@@ -3,7 +3,7 @@ import {Select} from "antd"
 
 const {Option} = Select;
 export const TEMP_API = 'https://around-179500.appspot.com';
-export const TOKEN_KEY = 'TOKEN';
+export const TOKEN_KEY = 'TOK4EN';
 export const REGISTER_JOB_SELECTION = [
     <Option key="Full-stack Engineer"> Full-stack Engineer </Option>,
     <Option key="Account Executive"> Account Executive </Option>,
@@ -28,6 +28,7 @@ export const GEOLOCATION_OPTIONS = {
 export const URL_HOST = 'http://localhost:8080/Jobplus';
 export const NEARBY = '/nearby';
 export const SEARCH = '/search';
+export const RECOMMEND = '/recommend';
 
 export const INIT_DATA = [
     {

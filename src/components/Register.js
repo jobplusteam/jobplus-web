@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import {TEMP_API, REGISTER_JOB_SELECTION} from "../constant";
+import {REGISTER_JOB_SELECTION, URL_HOST} from "../constant";
 import {
   Form,
   Input,
@@ -23,7 +23,7 @@ class RegistrationForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        fetch(`${TEMP_API}/signup`, {
+        fetch(`${URL_HOST}/register`, {
           method: 'POST',
           body: JSON.stringify({
             username: values.username,
@@ -139,6 +139,26 @@ class RegistrationForm extends Component {
                   },
                 ],
               })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+            </Form.Item>
+            <Form.Item label="First Name">
+              {getFieldDecorator('firstname', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your first name!',
+                  },
+                ],
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item label="Last Name">
+              {getFieldDecorator('lastname', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your last name!',
+                  },
+                ],
+              })(<Input />)}
             </Form.Item>
             <Form.Item label="Job Description">
               {getFieldDecorator('job description', {
