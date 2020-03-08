@@ -13,8 +13,8 @@ class Jobview extends Component {
     this.props.jobItem.is_saved = !this.props.jobItem.is_saved;
     fetch(`${URL_HOST}/save`, {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify({
-        //user_id: localStorage.getItem("user_id"),
         job_id: this.props.jobItem.id,
         is_save: this.props.jobItem.is_saved
       }),
@@ -38,10 +38,7 @@ class Jobview extends Component {
   }
 
   render() {
-    //console.log(this.props.jobItem.id);
     const item = this.props.jobItem;
-
-
     if (this.props.noData) {
       return (<div className="job-loading">No job data! Please try again!</div>);
     }
