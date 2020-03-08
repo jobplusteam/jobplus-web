@@ -20,14 +20,16 @@ class  NormalLoginForm extends React.Component {
             password: values.password,
           }),
         }).then((response) => {
+          //console.log(response.headers);
           lastResponse = response;
           return response.text();
         }, (error) => {
           console.log('Error');
         }).then((text) => {
           if (lastResponse.ok) {
+            localStorage.setItem("user_id", username);
             message.success('Login success!');
-            this.props.handleLogin(text, username);
+            this.props.handleLogin();
           } else {
             message.error(text);
           }

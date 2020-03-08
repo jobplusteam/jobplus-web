@@ -3,30 +3,23 @@ import '../styles/App.css';
 import Main from "./Main"
 import {TOKEN_KEY, URL_HOST} from '../constant';
 import TopBar from "./TopBar"
-import {Redirect} from "react-router-dom"
 
 class App extends React.Component{
-
   state = {
-    isLoggedIn: Boolean(localStorage.getItem(TOKEN_KEY)),
-    user_id: "",
+    isLoggedIn: localStorage.getItem("user_id") !== null
   }
 
-  handleLogin = (token, username) => {
-    localStorage.setItem(TOKEN_KEY, token);
+  handleLogin = () => {
     this.setState({
       isLoggedIn: true,
-      user_id: username,
     });
-    console.log("UserId: ",this.state.user_id);
   }
 
   handleLogout = () => {
-    localStorage.removeItem(TOKEN_KEY);
     this.setState({
       isLoggedIn: false,
-      user_id: "",
     });
+    localStorage.removeItem("user_id");
     fetch(`${URL_HOST}/logout`, {
       mode:'no-cors',
       method: 'GET',
@@ -35,7 +28,6 @@ class App extends React.Component{
     }, (error) => {
       console.log('Error');
     });
-    this.forceUpdate()
   }
 
   render() {

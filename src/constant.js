@@ -33,6 +33,7 @@ export const RECOMMEND = '/recommend';
 export const INIT_DATA = [
     {
         "id": "",
+        "is_saved": false,
         "type": "",
         "url": "",
         "created_at": "",
@@ -48,17 +49,7 @@ export const INIT_DATA = [
 
 export const jobdata1 = [
     {
-        "id": "20d3176c-23fc-43b4-b5df-2fbbd657bd02",
-        "type": "Full Time",
-        "url": "https://jobs.github.com/positions/20d3176c-23fc-43b4-b5df-2fbbd657bd02",
-        "created_at": "Wed Feb 19 21:56:03 UTC 2020",
-        "company": "Forerunner",
-        "company_url": "https://www.withforerunner.com/",
-        "location": "New York | San Francisco",
-        "title": "Full-stack Engineer",
-        "description": "<p><strong>Hi! We're Forerunner.</strong></p>\n<p>We believe that adaptation is a necessity, not a luxury, and all communities should have access to powerful software that helps them plan for the future. The challenge of climate change is complex — it implicates how municipalities plan, manage capital, and communicate to both residents and higher levels of government. Forerunner helps local communities do these things better by empowering them to access, understand, and mobilize local-level flood risk data at scale. Our software is built to be easy-to-use, so that the planners and floodplain managers preparing for our future can focus on the important stuff.</p>\n<p>Currently, we're working with a handful of communities, including the City of New Orleans and Pinellas County, FL. Our engineering team is hard at work on projects that involve extracting information from permits, managing complex datasets, and incorporating geospatial data. Our mission is ambitious, and we have a significant amount of work ahead. As our newest team member, you'll be joining us at a crucial time when you'll have a real impact on our direction and our partner municipalities' success.</p>\n<p><strong>About the position:</strong></p>\n<p>We're looking for a senior full-stack engineer with 5+ years of experience to join us. We would love to hear from you if you're interested in what we do and have a proven track record of leading mid- to large-scale technical initiatives. In general, you might be a good fit if you:</p>\n<ul>\n<li>Have partial, or full, familiarity with our technical stack: Node, GraphQL, React, Postgres + PostGIS, Heroku. If not, we would like you to be confident in your ability to ramp up quickly.</li>\n<li>Are comfortable with a high degree of ambiguity. Since we are constantly learning a lot from our partners, we are looking for someone who has a bias toward action and can balance the challenging trade-off between quality and speed.</li>\n<li>Consider yourself to be a great communicator. We're a small team working remotely, which requires us to be prompt and clear with written and spoken communication.</li>\n</ul>\n<p><strong>Our team has a lot to offer.</strong></p>\n<p>Forerunner is a seed-stage company with an interdisciplinary team. We are motivated by seemingly intractable problems and work hard to support one another.</p>\n<p><strong>We're mission driven.</strong> Our mission orients our business strategy and pushes us to work with a sense of urgency. We’re in the weeds — our entire team spends time engaging with our partners in the field to better understand the real-world challenges they face.</p>\n<p><strong>We're a small team.</strong> We're currently 4 people — you will be the 5th. As a member of our growing team, you will quickly become an invaluable part of our organization and have a meaningful impact on our business and technical direction. We welcome unique perspectives and backgrounds. Your opinion matters and we hope you'll share it.</p>\n<p><strong>We're remote.</strong> While many of us are based in NYC, we're happy to have you work where you are happiest and most productive. We offer schedule flexibility and ask for accountability in return.</p>\n<p><strong>We want you to be happy and healthy.</strong> Forerunner offers competitive compensation, health/vision/dental coverage (we pay 70%), and commuter benefits. We also have a quarterly wellness reimbursement so that you can have flexibility in defining what health means to you.</p>\n<p><strong>We look forward to meeting you!</strong></p>\n",
-        "how_to_apply": "<p>Email us at <a href=\"mailto:jobs@withforerunner.com\">jobs@withforerunner.com</a></p>\n",
-        "company_logo": "https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBalovIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7bf83ccdf9c0ee9f9da38c1f36403a73353e7d32/Forerunner_logo.png"
+        "title": "Function needs to be completed!!!"
     }
 ];
 
