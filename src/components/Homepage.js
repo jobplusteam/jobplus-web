@@ -197,7 +197,9 @@ class Homepage extends Component {
             nearbyJobData={this.state.nearbyJobData}
             searchedJobData={this.state.searchedJobData}
             isSearched={this.state.isSearched}
-            isLoggedIn={this.props.isLoggedIn}/>}
+            isLoggedIn={this.props.isLoggedIn}
+            user_id={this.props.user_id}
+          />}
       </div>
     );
   }
