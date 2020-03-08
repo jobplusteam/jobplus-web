@@ -21,7 +21,7 @@ class TopBar extends Component {
                 <Link to="/myprofile">
                   <div className="profile">
                     <Icon type="profile" />
-                    {' '}My Page
+                    {' '}{localStorage.getItem("full_name")}
                   </div>
                 </Link>
                 <Link to="/homepage">

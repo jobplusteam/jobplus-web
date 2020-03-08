@@ -1,12 +1,12 @@
 import React from 'react';
 import '../styles/App.css';
 import Main from "./Main"
-import {TOKEN_KEY, URL_HOST} from '../constant';
+import {URL_HOST} from '../constant';
 import TopBar from "./TopBar"
 
-class App extends React.Component{
+class App extends React.Component {
   state = {
-    isLoggedIn: localStorage.getItem("user_id") !== null
+    isLoggedIn: false
   }
 
   handleLogin = () => {
@@ -19,23 +19,45 @@ class App extends React.Component{
     this.setState({
       isLoggedIn: false,
     });
-    localStorage.removeItem("user_id");
     fetch(`${URL_HOST}/logout`, {
-      mode:'no-cors',
+      // mode: 'no-cors',
+      credentials: 'include',
       method: 'GET',
-      }).then((response) => {
+    }).then((response) => {
+      localStorage.removeItem("full_name");
       console.log('Logout successful')
     }, (error) => {
       console.log('Error');
     });
   }
 
+  checkUserLogin = () => {
+    fetch(`${URL_HOST}/login`, {
+      method: 'GET',
+      credentials: 'include'
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      console.log(data);
+      if (data.status !== "no session") {
+        localStorage.setItem("full_name", data.status);
+        this.setState({
+          isLoggedIn: true
+        })
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.checkUserLogin();
+  }
+
   render() {
     return (
-        <div className="App">
-          <TopBar isLoggedIn={this.state.isLoggedIn} handleLogout={this.handleLogout} />
-          <Main isLoggedIn={this.state.isLoggedIn} user_id={this.state.user_id} handleLogin={this.handleLogin}  />
-        </div>
+      <div className="App">
+        <TopBar isLoggedIn={this.state.isLoggedIn} handleLogout={this.handleLogout}/>
+        <Main isLoggedIn={this.state.isLoggedIn} user_id={this.state.user_id} handleLogin={this.handleLogin}/>
+      </div>
     );
   }
 }

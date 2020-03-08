@@ -5,6 +5,7 @@ import '../styles/Login.css';
 import { Form, Icon, Input, Button, message } from 'antd';
 
 class  NormalLoginForm extends React.Component {
+
   handleSubmit = e => {
     e.preventDefault();
     let lastResponse;
@@ -15,12 +16,13 @@ class  NormalLoginForm extends React.Component {
         username = values.username;
         fetch(`${URL_HOST}/login`, {
           method: 'POST',
+          credentials: 'include',
           body: JSON.stringify({
             user_id: values.username,
             password: values.password,
           }),
         }).then((response) => {
-          //console.log(response.headers);
+
           lastResponse = response;
           return response.text();
         }, (error) => {
