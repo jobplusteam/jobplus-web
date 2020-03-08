@@ -40,21 +40,21 @@ class Joblist extends Component {
   render() {
     //console.log(this.props.jobData)
     const tab = this.props.tabName;
-    const jobData = this.props.jobData;
-    const datalist = [];
     let index = 1;
-    if (this.props.jobData.length > 0) {
-      for (let i = 0; i < this.props.jobData.length; i++) {
-        datalist.push(jobData[i])
-      }
-    }
+    // const jobData = this.props.jobData;
+    // const datalist = [];
+    // if (this.props.jobData.length > 0) {
+    //   for (let i = 0; i < this.props.jobData.length; i++) {
+    //     datalist.push(jobData[i])
+    //   }
+    // }
     return (
       <div className="job-list">
         <div className="job-list-item">
           <h2>{tab}</h2>
           <List
             itemLayout="horizontal"
-            dataSource={datalist}
+            dataSource={this.props.jobData}
             renderItem={item => (
               <List.Item
                 id={index++}

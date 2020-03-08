@@ -19,7 +19,6 @@ class RegistrationForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    let lastResponse;
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
@@ -37,16 +36,16 @@ class RegistrationForm extends Component {
             interests: values.interests,
           }),
         }).then((response) => {
-          lastResponse = response;
           return response.text();
         }, (error) => {
           console.log('Error');
         }).then((text) => {
-          if (lastResponse.ok) {
-            message.success(text);
+          const response = JSON.parse(text);
+          if (response.status === "ok") {
+            message.success("Registered Successfully!");
             this.props.history.push('/login');
           } else {
-            message.error(text);
+            message.error(response.status);
           }
         });
       }

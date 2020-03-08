@@ -2,6 +2,7 @@ import React from 'react';
 import {Tabs} from 'antd';
 import Joblist from './Joblist';
 import '../styles/TabContainer.css'
+import {jobdata1} from "../constant";
 
 const {TabPane} = Tabs;
 
@@ -42,7 +43,7 @@ class TabContainer extends React.Component {
               <Joblist tabName="Nearby Jobs" jobData={this.props.nearbyJobData} isLoggedIn={this.props.isLoggedIn}/>
             </TabPane>
             <TabPane tab="Recommend Jobs" key="2">
-              <Joblist tabName = "Recommend Jobs" jobData = {this.props.searchedJobData} isLoggedIn={this.props.isLoggedIn}/>
+              <Joblist tabName = "Recommend Jobs" jobData = {jobdata1} isLoggedIn={this.props.isLoggedIn}/>
             </TabPane>
             <TabPane tab="Searched Jobs" key="3">
               <Joblist tabName="Searched Jobs" jobData={this.props.searchedJobData} isLoggedIn={this.props.isLoggedIn}/>
@@ -53,7 +54,7 @@ class TabContainer extends React.Component {
             <TabPane tab="Nearby Jobs" key="1">
               <Joblist tabName="Nearby Jobs" jobData={this.props.nearbyJobData} isLoggedIn={this.props.isLoggedIn}/>
             </TabPane>
-            <TabPane tab="Searched Jobs" key="3">
+            <TabPane tab="Searched Jobs" key="2">
               <Joblist tabName="Searched Jobs" jobData={this.props.searchedJobData} isLoggedIn={this.props.isLoggedIn}/>
             </TabPane>
           </Tabs>
@@ -62,6 +63,5 @@ class TabContainer extends React.Component {
     );
   }
 }
-
 
 export default TabContainer;

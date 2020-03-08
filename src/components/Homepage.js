@@ -56,18 +56,18 @@ class Homepage extends Component {
     switch (method) {
       case NEARBY:
         stateKey = "nearbyJobData";
-        url = `${URL_HOST}${method}?lat=${position.latitude}&lon=${position.longitude}`;
+        url = `${URL_HOST}${method}?lat=${position.latitude}&lon=${position.longitude}&user_id=${this.props.user_id}`;
         break;
       case SEARCH:
         stateKey = "searchedJobData";
-        url = `${URL_HOST}${method}?description=${this.state.jobDescription}&location=${this.state.jobLocation}&full_time=${this.state.fullTime}`;
+        url = `${URL_HOST}${method}?description=${this.state.jobDescription}&location=${this.state.jobLocation}&full_time=${this.state.fullTime}&user_id=${this.props.user_id}`;
         break;
       default:
         stateKey = "nearbyJobData";
     }
+    //console.log(url);
     fetch(url, {
       method: 'GET',
-      headers: {},
     }).then((response) => {
       if (response.ok) {
         return response.json();
@@ -78,22 +78,20 @@ class Homepage extends Component {
       console.log(data);
       if (url_method === SEARCH) {
         this.setState({
-          isLoadingSearched: false,
           isLoading: false,
           searchedJobData: data.length !== 0 ? data : INIT_DATA
         });
       } else if (url_method === NEARBY) {
         this.setState({
-          isLoadingNearby: false,
           isLoading: false,
           nearbyJobData: data.length !== 0 ? data : INIT_DATA
         });
       }
     }).catch((e) => {
-      console.log(e.message);
-      this.setState({
-        message: "Fail to fetch data!"
-      })
+      // console.log(e.message);
+      // this.setState({
+      //   message: "Fail to fetch data!"
+      // })
     });
   }
 
@@ -198,7 +196,6 @@ class Homepage extends Component {
             searchedJobData={this.state.searchedJobData}
             isSearched={this.state.isSearched}
             isLoggedIn={this.props.isLoggedIn}
-            user_id={this.props.user_id}
           />}
       </div>
     );
