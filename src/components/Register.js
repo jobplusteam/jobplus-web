@@ -23,11 +23,18 @@ class RegistrationForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        if (values.interests == null) {
+          values.interests = [];
+        }
+        console.log(values.interests);
         fetch(`${URL_HOST}/register`, {
           method: 'POST',
           body: JSON.stringify({
-            username: values.username,
+            user_id: values.username,
             password: values.password,
+            first_name: values.first_name,
+            last_name: values.last_name,
+            interests: values.interests,
           }),
         }).then((response) => {
           lastResponse = response;
@@ -141,7 +148,7 @@ class RegistrationForm extends Component {
               })(<Input.Password onBlur={this.handleConfirmBlur} />)}
             </Form.Item>
             <Form.Item label="First Name">
-              {getFieldDecorator('firstname', {
+              {getFieldDecorator('first_name', {
                 rules: [
                   {
                     required: true,
@@ -151,7 +158,7 @@ class RegistrationForm extends Component {
               })(<Input />)}
             </Form.Item>
             <Form.Item label="Last Name">
-              {getFieldDecorator('lastname', {
+              {getFieldDecorator('last_name', {
                 rules: [
                   {
                     required: true,
@@ -161,11 +168,11 @@ class RegistrationForm extends Component {
               })(<Input />)}
             </Form.Item>
             <Form.Item label="Job Description">
-              {getFieldDecorator('job description', {
+              {getFieldDecorator('interests', {
                 rules: [
                   {
-                    required: true,
-                    message: 'Please choose your job!',
+                    required: false,
+                    message: 'Please choose your interests!',
                   },
                 ],
               })(
