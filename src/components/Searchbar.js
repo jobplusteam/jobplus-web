@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Input } from 'antd';
 import '../styles/Searchbar.css';
-
+import {Button} from "antd"
 
 class Searchbar extends Component {
     constructor( props) {
@@ -58,7 +58,7 @@ class Searchbar extends Component {
                             onPressEnter={this.onPressEnter}
                     />
                 </div>
-                <button className="searchButton" onClick={this.onPressEnter}>Search</button>
+                <Button type="primary" htmlType="submit" className="searchButton" onClick={this.onPressEnter}>Search</Button>
             </div>
         );
     }

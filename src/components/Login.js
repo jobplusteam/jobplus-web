@@ -8,9 +8,11 @@ class  NormalLoginForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     let lastResponse;
+    let username;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        username = values.username;
         fetch(`${URL_HOST}/login`, {
           method: 'POST',
           body: JSON.stringify({
@@ -25,7 +27,7 @@ class  NormalLoginForm extends React.Component {
         }).then((text) => {
           if (lastResponse.ok) {
             message.success('Login success!');
-            this.props.handleLogin(text);
+            this.props.handleLogin(text, username);
           } else {
             message.error(text);
           }

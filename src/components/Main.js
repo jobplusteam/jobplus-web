@@ -9,7 +9,7 @@ import '../styles/Login.css'
 class Main extends Component {
 
   getHome = () => {
-    return <Homepage isLoggedIn={this.props.isLoggedIn}/>;
+    return <Homepage isLoggedIn={this.props.isLoggedIn} user_id={this.props.user_id}/>;
   }
 
   getLogin = () => {
