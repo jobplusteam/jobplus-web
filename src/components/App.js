@@ -9,12 +9,6 @@ class App extends React.Component {
     isLoggedIn: false
   }
 
-  handleLogin = () => {
-    this.setState({
-      isLoggedIn: true,
-    });
-  }
-
   handleLogout = () => {
     this.setState({
       isLoggedIn: false,
@@ -31,7 +25,7 @@ class App extends React.Component {
     });
   }
 
-  checkUserLogin = () => {
+  handleLogin = () => {
     fetch(`${URL_HOST}/login`, {
       method: 'GET',
       credentials: 'include'
@@ -49,7 +43,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.checkUserLogin();
+    this.handleLogin();
   }
 
   render() {
