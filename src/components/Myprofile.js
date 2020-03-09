@@ -43,7 +43,7 @@ class Myprofile extends Component {
   render() {
     return (
         <div className="my-profile">
-          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey}>
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} className="profile-tabs">
             <TabPane tab="My Profile" key="1">
               <Profileview jobData={this.state.savedJobData}/>
             </TabPane>

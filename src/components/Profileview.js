@@ -46,7 +46,7 @@ export class Profileview extends Component {
         return (
             <div className="profile-view">
                 <div className="profile-personInfo">
-                    <h2>Welcome, xxx</h2>
+                    <h2 className="welcome">Welcome, xxx</h2>
                     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                         <Form.Item name={['user', 'Username']} label="Username" rules={[{ required: true }]}>
                             <Input defaultValue={"jiangkang"} disabled={true}/>
