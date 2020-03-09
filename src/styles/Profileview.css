@@ -7,10 +7,18 @@
 
     margin-top: 50px;
     display: flex;
+
+    justify-content: center;
+
+}
+.ant-form.profile-personInfo,
+.profile-personInfo {
+    padding-right: 125px;
 }
 
-.profile-personInfo {
-    padding-right: 60px;
+.welcome {
+    margin-left: 100px;
+    margin-bottom: 20px;
 }
 
 .profile-savedList {
