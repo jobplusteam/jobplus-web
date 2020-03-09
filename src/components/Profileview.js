@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, List} from 'antd';
 import '../styles/Profileview.css';
 import {URL_HOST} from '../constant';
 
@@ -42,24 +42,62 @@ export class Profileview extends Component {
         const onFinish = values => {
             console.log(values);
         };
+        let index = 1;
         return (
             <div className="profile-view">
-            <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-                <Form.Item name={['user', 'Username']} label="Username" rules={[{ required: true }]}>
-                    <Input defaultValue={"jiangkang"} disabled={true}/>
-                </Form.Item>
-                <Form.Item name={['user', 'Firstname']} label="Firstname" rules={[{ required: true }]}>
-                    <Input defaultValue={"kang"} disabled={true}/>
-                </Form.Item>
-                <Form.Item name={['user', 'Lastname']} label="Lastname" >
-                    <Input defaultValue={"jiang"} disabled={true}/>
-                </Form.Item>
-                <Form.Item name={['user', 'Interest']} label="Interest">
-                    <Input defaultValue={"jiang"} disabled={true}/>
-                </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                </Form.Item>
-            </Form>
+                <div className="profile-personInfo">
+                    <h2>Welcome, xxx</h2>
+                    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                        <Form.Item name={['user', 'Username']} label="Username" rules={[{ required: true }]}>
+                            <Input defaultValue={"jiangkang"} disabled={true}/>
+                        </Form.Item>
+                        <Form.Item name={['user', 'Firstname']} label="Firstname" rules={[{ required: true }]}>
+                            <Input defaultValue={"kang"} disabled={true}/>
+                        </Form.Item>
+                        <Form.Item name={['user', 'Lastname']} label="Lastname" >
+                            <Input defaultValue={"jiang"} disabled={true}/>
+                        </Form.Item>
+                        <Form.Item name={['user', 'Interest']} label="Interest">
+                            <Input defaultValue={"jiang"} disabled={true}/>
+                        </Form.Item>
+                        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                        </Form.Item>
+                    </Form>
+                </div>
+                <div className="profile-savedList">
+                    {this.props.jobData.length == 0 ? 
+                    <h2>You have no saved jobs yet...</h2> :
+                    
+                    <div>
+                        <h2>Here are the jobs you saved: </h2>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={this.props.jobData}
+                            renderItem={item => (
+                                <List.Item
+                                    id={index++}
+                                    className='job-item'
+                                    // onClick={(event) => {
+                                    //     this.setState({
+                                    //         item: item,
+                                    //     });
+                                    //     // const node = event.target;
+                                    //     // node.className +=" active";
+                                    //     // console.log(node);
+                                    // }}
+                                    >
+                                    <List.Item.Meta
+                                        title={item.title}
+                                        description={item.company}
+                                    />
+                                </List.Item>
+                            )}
+                        />
+                    </div>
+                    }
+                </div>
+                
+            
             </div>
         );
     }
