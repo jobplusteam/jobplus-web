@@ -28,7 +28,6 @@ import {
 class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.callAddTab = React.createRef();
   }
 
   state = {
@@ -50,20 +49,18 @@ class Homepage extends Component {
       isLoading: true
     })
     const method = url_method;
-    let stateKey;
-    let url;
+    let url = '';
     const position = JSON.parse(localStorage.getItem(POSITION_KEY));
     switch (method) {
       case NEARBY:
-        stateKey = "nearbyJobData";
         url = `${URL_HOST}${method}?lat=${position.latitude}&lon=${position.longitude}`;
         break;
       case SEARCH:
-        stateKey = "searchedJobData";
         url = `${URL_HOST}${method}?description=${this.state.jobDescription}&location=${this.state.jobLocation}&full_time=${this.state.fullTime}`;
         break;
+      case RECOMMEND:
+        url = `${URL_HOST}${method}?recommend`;
       default:
-        stateKey = "nearbyJobData";
     }
     //console.log(url);
     fetch(url, {
@@ -85,6 +82,11 @@ class Homepage extends Component {
         this.setState({
           isLoading: false,
           nearbyJobData: data.length !== 0 ? data : INIT_DATA
+        });
+      } else {
+        this.setState({
+          isLoading: false,
+          recommendJobData: data.length !== 0 ? data : INIT_DATA
         });
       }
     }).catch((e) => {
@@ -163,13 +165,11 @@ class Homepage extends Component {
 
   //fetch nearby data and recommend data when user logged in
   componentDidMount() {
-    console.log("isLoggedIn:", this.props.isLoggedIn);
+    //console.log("isLoggedIn:", this.props.isLoggedIn);
     this.getGeolocation();
     this.fetchNearbyResult(NEARBY);
     this.fetchNearbyResult(SEARCH);
-    if (this.props.isLoggedIn) {
-      this.fetchNearbyResult(RECOMMEND);
-    }
+    this.fetchNearbyResult(RECOMMEND);
     setTimeout(() => {
         this.setState({
             message: "Failed to fetch job data! Please Refresh the Page!"
@@ -194,6 +194,7 @@ class Homepage extends Component {
           <TabContainer
             nearbyJobData={this.state.nearbyJobData}
             searchedJobData={this.state.searchedJobData}
+            recommendJobData={this.state.recommendJobData}
             isSearched={this.state.isSearched}
             isLoggedIn={this.props.isLoggedIn}
           />}

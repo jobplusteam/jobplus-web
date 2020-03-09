@@ -42,7 +42,7 @@ class RegistrationForm extends Component {
         }).then((text) => {
           let response = JSON.parse(text);
           if (response.status === "ok") {
-            message.success("Registered Successfully!");
+            message.success("Registered successfully!");
             this.props.history.push('/login');
           } else {
             message.error(response.status);

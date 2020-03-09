@@ -28,12 +28,13 @@ class  NormalLoginForm extends React.Component {
         }, (error) => {
           console.log('Error');
         }).then((text) => {
+          let data = JSON.parse(text);
           if (lastResponse.ok) {
             localStorage.setItem("user_id", username);
             message.success('Login success!');
             this.props.handleLogin();
           } else {
-            message.error(text);
+            message.error(data.status);
           }
         });
       }
