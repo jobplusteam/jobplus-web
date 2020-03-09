@@ -39,7 +39,7 @@ class Homepage extends Component {
     nearbyJobData: INIT_DATA,
     recommendJobData: INIT_DATA,
     searchedJobData: INIT_DATA,
-    isLoading: false,
+    isLoading: true,
     isSearched: false,
     message: "Fetching Job Data..."
   }
@@ -83,7 +83,7 @@ class Homepage extends Component {
           isLoading: false,
           nearbyJobData: data.length !== 0 ? data : INIT_DATA
         });
-      } else {
+      } else if (url_method === RECOMMEND && data.message === undefined){
         this.setState({
           isLoading: false,
           recommendJobData: data.length !== 0 ? data : INIT_DATA
@@ -175,7 +175,7 @@ class Homepage extends Component {
             message: "Failed to fetch job data! Please Refresh the Page!"
         });
         //console.log(this.props.message)
-    }, 5000)
+    }, 8000)
   }
 
   render() {
