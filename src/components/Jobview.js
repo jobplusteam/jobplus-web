@@ -21,14 +21,13 @@ class Jobview extends Component {
     }).then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if (data.result === "SAVE") {
-          message.success("Save Job Successfully!");
-        } else if (data.result === "UNSAVE") {
-          message.success("UnSave Job Successfully!");
-        } else {
-          message.error(data.status);
+        if (data.message === "successful!") {
+          message.success(`${data.result} ${data.message}`);
+        } else if (data.result === "failed!") {
+          message.error(`${data.result} ${data.message}`);
         }
       }).catch((error) => {
+        message.error("Save job error!")
       console.log(error);
     });
 
@@ -40,7 +39,7 @@ class Jobview extends Component {
   render() {
     const item = this.props.jobItem;
     if (this.props.noData) {
-      return (<div className="job-loading">No job data! Please try again!</div>);
+      return (<div className="job-loading">No job data!</div>);
     }
     return (
       <div className="job-view">

@@ -65,9 +65,9 @@ class Joblist extends Component {
           />
         </div>
         <Jobview
-            jobItem={this.state.item}
-            noData={this.props.jobData.length === 0 || this.props.jobData[0].id === ""}
-            isLoggedIn={this.props.isLoggedIn}
+          jobItem={this.state.item}
+          noData={this.props.jobData.length === 0 || this.props.jobData[0].id === ""}
+          isLoggedIn={this.props.isLoggedIn}
         />
       </div>
     );
