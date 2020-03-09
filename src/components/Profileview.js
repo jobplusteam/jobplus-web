@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Input, List} from 'antd';
+import { Form, Input} from 'antd';
 import '../styles/Profileview.css';
 import {URL_HOST} from '../constant';
 
@@ -64,40 +64,6 @@ export class Profileview extends Component {
                         </Form.Item>
                     </Form>
                 </div>
-                <div className="profile-savedList">
-                    {this.props.jobData.length == 0 ? 
-                    <h2>You have no saved jobs yet...</h2> :
-                    
-                    <div>
-                        <h2>Here are the jobs you saved: </h2>
-                        <List
-                            itemLayout="horizontal"
-                            dataSource={this.props.jobData}
-                            renderItem={item => (
-                                <List.Item
-                                    id={index++}
-                                    className='job-item'
-                                    // onClick={(event) => {
-                                    //     this.setState({
-                                    //         item: item,
-                                    //     });
-                                    //     // const node = event.target;
-                                    //     // node.className +=" active";
-                                    //     // console.log(node);
-                                    // }}
-                                    >
-                                    <List.Item.Meta
-                                        title={item.title}
-                                        description={item.company}
-                                    />
-                                </List.Item>
-                            )}
-                        />
-                    </div>
-                    }
-                </div>
-                
-            
             </div>
         );
     }
