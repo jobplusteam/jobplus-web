@@ -11,10 +11,15 @@ class Myprofile extends Component {
 
   state = {
     savedJobData: INIT_DATA,
-    activeKey: '1'
+    activeKey: '1',
+    isLoading: false
   }
 
   callback = (key) => {
+    if (key === '2') {
+      this.fetchSavedJobs();
+    }
+
     this.setState({
       activeKey: key
     })
@@ -22,6 +27,9 @@ class Myprofile extends Component {
 
   fetchSavedJobs = () => {
     let url = `${URL_HOST}/save`;
+    this.setState({
+      isLoading: true
+    })
     fetch(url, {
       method: 'GET',
       credentials: 'include',
@@ -30,7 +38,10 @@ class Myprofile extends Component {
       return response.json();
     }).then((data) => {
       console.log(data);
-      this.setState({savedJobData: data});
+      this.setState({
+        savedJobData: data,
+        isLoading: false
+      });
     }).catch((e) => {
       console.log(e.message);
     });
@@ -41,9 +52,21 @@ class Myprofile extends Component {
   }
 
   render() {
+
     return (
-        <div className="my-profile">
-          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} className="profile-tabs">
+      <div className="my-profile">
+        {this.state.isLoading ?
+          // <div className="loading">Fetching data</div>
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} >
+            <TabPane tab="My Profile" key="1" className="profile-tabs1">
+              Fetching data...
+            </TabPane>
+            <TabPane tab="Saved Jobs" key="2" className="profile-tabs2">
+              Fetching data...
+            </TabPane>
+          </Tabs>
+          :
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} >
             <TabPane tab="My Profile" key="1">
               <Profileview jobData={this.state.savedJobData}/>
             </TabPane>
@@ -51,7 +74,9 @@ class Myprofile extends Component {
               <Joblist jobData={this.state.savedJobData} isLoggedIn={this.props.isLoggedIn}/>
             </TabPane>
           </Tabs>
-        </div>
+        }
+      </div>
+
     );
   }
 }

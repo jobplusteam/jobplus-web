@@ -10,7 +10,8 @@ import {
   URL_HOST,
   NEARBY,
   SEARCH,
-  RECOMMEND} from "../constant";
+  RECOMMEND
+} from "../constant";
 
 /**
  *   1. data from children: (searchBar and filter need callback function from homepage)
@@ -68,7 +69,7 @@ class Homepage extends Component {
       credentials: 'include',
     }).then((response) => {
       console.log(url);
-        return response.text();
+      return response.text();
       //throw new Error('Failed to load nearby search');
     }).then((text) => {
       let data = JSON.parse(text);
@@ -83,7 +84,7 @@ class Homepage extends Component {
           isLoading: false,
           nearbyJobData: data.length !== 0 ? data : INIT_DATA
         });
-      } else if (url_method === RECOMMEND && data.message === undefined){
+      } else if (url_method === RECOMMEND && data.message === undefined) {
         this.setState({
           isLoading: false,
           recommendJobData: data.length !== 0 ? data : INIT_DATA
@@ -171,10 +172,10 @@ class Homepage extends Component {
     this.fetchNearbyResult(SEARCH);
     this.fetchNearbyResult(RECOMMEND);
     setTimeout(() => {
-        this.setState({
-            message: "Failed to fetch job data! Please Refresh the Page!"
-        });
-        //console.log(this.props.message)
+      this.setState({
+        message: "Failed to fetch job data! Please Refresh the Page!"
+      });
+      //console.log(this.props.message)
     }, 8000)
   }
 
