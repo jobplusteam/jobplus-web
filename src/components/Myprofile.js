@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
-import logo from '../logo.svg';
 import {Profileview} from './Profileview'
-import {URL_HOST} from "../constant";
+import {Tabs} from 'antd';
+import "../styles/Myprofile.css";
+import {URL_HOST, INIT_DATA} from "../constant";
+import Joblist from "./Joblist";
+
+const {TabPane} = Tabs;
 
 class Myprofile extends Component {
 
   state = {
-    savedJobData: []
+    savedJobData: INIT_DATA,
+    activeKey: '1'
+  }
+
+  callback = (key) => {
+    this.setState({
+      activeKey: key
+    })
   }
 
   fetchSavedJobs = () => {
@@ -31,8 +42,15 @@ class Myprofile extends Component {
 
   render() {
     return (
-        <div>
-            <Profileview jobData={this.state.savedJobData}/>
+        <div className="my-profile">
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey}>
+            <TabPane tab="My Profile" key="1">
+              <Profileview jobData={this.state.savedJobData}/>
+            </TabPane>
+            <TabPane tab="Saved Jobs" key="2">
+              <Joblist jobData={this.state.savedJobData} isLoggedIn={this.props.isLoggedIn}/>
+            </TabPane>
+          </Tabs>
         </div>
     );
   }

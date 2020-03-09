@@ -16,12 +16,8 @@ class Main extends Component {
     return this.props.isLoggedIn ? <Redirect to="/home" /> : <Login handleLogin={this.props.handleLogin} />;
   }
 
-  getRoot = () => {
-    return this.props.isLoggedIn ? <Redirect to="/home" /> : <Redirect to="/login" />;
-  }
-
   getProfile = () => {
-    return this.props.isLoggedIn ? <Myprofile /> : <Redirect to="/login" />;
+    return this.props.isLoggedIn ? <Myprofile isLoggedIn={this.props.isLoggedIn}/> : <Redirect to="/login" />;
   }
 
   render() {
