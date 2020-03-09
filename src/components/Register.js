@@ -38,15 +38,17 @@ class RegistrationForm extends Component {
         }).then((response) => {
           return response.text();
         }, (error) => {
-          console.log('Error');
+          console.log(error);
         }).then((text) => {
-          const response = JSON.parse(text);
+          let response = JSON.parse(text);
           if (response.status === "ok") {
             message.success("Registered Successfully!");
             this.props.history.push('/login');
           } else {
             message.error(response.status);
           }
+        }).catch((error) => {
+          console.log(error);
         });
       }
     });

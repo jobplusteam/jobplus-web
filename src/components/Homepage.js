@@ -71,10 +71,11 @@ class Homepage extends Component {
       credentials: 'include',
     }).then((response) => {
       console.log(url);
-        return response.json();
+        return response.text();
       //throw new Error('Failed to load nearby search');
-    }).then((data) => {
-      console.log(data);
+    }).then((text) => {
+      let data = JSON.parse(text);
+      console.log(data)
       if (url_method === SEARCH) {
         this.setState({
           isLoading: false,
@@ -88,9 +89,9 @@ class Homepage extends Component {
       }
     }).catch((e) => {
       console.log(e.message);
-      // this.setState({
-      //   message: "Fail to fetch data!"
-      // })
+      this.setState({
+        message: "Fail to fetch data!"
+      })
     });
   }
 
