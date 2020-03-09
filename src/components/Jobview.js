@@ -44,13 +44,15 @@ class Jobview extends Component {
     }
     return (
       <div className="job-view">
-        <img src={item.company_logo} className="job-view-logo"/>
-        <h1>{item.title}</h1>
 
-        <span className="job-view-jobtype">{item.type}</span>
+        <img src={item.company_logo} className="job-view-logo"/>
+        <h2>{item.title}</h2>
+        <p><a href={item.company_url} target="_blank">{item.company}</a></p>
+        <span className="job-view-jobtype">Type: {item.type}</span>
+        <span className="job-view-location">Location: {item.location}</span>
         {
           this.props.isLoggedIn ?
-            <div>
+            <div className="job-view-btn">
               <Button
                 type="primary"
                 htmlType="submit"
@@ -58,15 +60,25 @@ class Jobview extends Component {
                 onClick={this.handleClickSave} className="save-button">
                 {this.props.jobItem.is_saved ? "Saved" : "Save"}
               </Button>
+              <Button
+                type="primary"
+                htmlType="button"
+                ghost={true}
+                href={this.props.jobItem.url}
+                target="_blank"
+                className="save-button">
+                {"Apply From GitHub"}
+              </Button>
             </div> : null
-        }
+        }<h2>How to apply:</h2>
+        <div
+          dangerouslySetInnerHTML={{__html: item.how_to_apply}}
+          className="job-view-html"/>
         <h2>Job Description</h2>
         <div
           dangerouslySetInnerHTML={{__html: item.description}}
           className="job-view-html"/>
-        <div
-          dangerouslySetInnerHTML={{__html: item.how_to_apply}}
-          className="job-view-html"/>
+
       </div>
     );
   }
