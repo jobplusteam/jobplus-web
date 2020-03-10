@@ -12,7 +12,8 @@ class Myprofile extends Component {
   state = {
     savedJobData: INIT_DATA,
     activeKey: '1',
-    isLoading: false
+    isLoading: false,
+    profileData: null
   }
 
   callback = (key) => {
@@ -47,8 +48,33 @@ class Myprofile extends Component {
     });
   }
 
+  fetchProfile = () => {
+    let url = `${URL_HOST}/profile`;
+    this.setState({
+      isLoading: true
+    })
+    fetch(url, {
+      method: 'GET',
+      credentials: 'include',
+    }).then((response) => {
+      console.log(url);
+      return response.json();
+    }).then((data) => {
+      console.log(data);
+      this.setState({
+        profileData: data,
+        isLoading: false
+      });
+    }).catch((e) => {
+      console.log(e.message);
+    });
+  }
+
+
+
   componentDidMount() {
     this.fetchSavedJobs();
+    this.fetchProfile();
   }
 
   render() {
