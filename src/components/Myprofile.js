@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Profileview} from './Profileview'
 import {Tabs} from 'antd';
 import "../styles/Myprofile.css";
-import {URL_HOST, INIT_DATA} from "../constant";
+import {URL_HOST, INIT_DATA, INIT_PROFILE, PROFILE, SAVE} from "../constant";
 import Joblist from "./Joblist";
 
 const {TabPane} = Tabs;
@@ -12,21 +12,21 @@ class Myprofile extends Component {
   state = {
     savedJobData: INIT_DATA,
     activeKey: '1',
-    isLoading: false
+    isLoading: false,
+    profileData: INIT_PROFILE
   }
 
   callback = (key) => {
     if (key === '2') {
-      this.fetchSavedJobs();
+      this.fetchData(SAVE);
     }
-
     this.setState({
       activeKey: key
     })
   }
 
-  fetchSavedJobs = () => {
-    let url = `${URL_HOST}/save`;
+  fetchData = (url_method) => {
+    let url = `${URL_HOST}${url_method}`;
     this.setState({
       isLoading: true
     })
@@ -38,26 +38,34 @@ class Myprofile extends Component {
       return response.json();
     }).then((data) => {
       console.log(data);
-      this.setState({
-        savedJobData: data,
-        isLoading: false
-      });
+      if (url_method === SAVE) {
+        this.setState({
+          savedJobData: data,
+          isLoading: false
+        });
+      } else if (url_method === PROFILE) {
+        this.setState({
+          profileData: data,
+          isLoading: false
+        });
+      }
     }).catch((e) => {
       console.log(e.message);
     });
   }
 
   componentDidMount() {
-    this.fetchSavedJobs();
+    this.fetchData(SAVE);
+    this.fetchData(PROFILE);
   }
 
   render() {
-
     return (
       <div className="my-profile">
+        <h2 className="welcome">Welcome {localStorage.getItem("full_name")}</h2>
         {this.state.isLoading ?
           // <div className="loading">Fetching data</div>
-          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} >
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey}>
             <TabPane tab="My Profile" key="1" className="profile-tabs1">
               Fetching data...
             </TabPane>
@@ -66,9 +74,9 @@ class Myprofile extends Component {
             </TabPane>
           </Tabs>
           :
-          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} >
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey}>
             <TabPane tab="My Profile" key="1">
-              <Profileview jobData={this.state.savedJobData}/>
+              <Profileview profileData={this.state.profileData}/>
             </TabPane>
             <TabPane tab="Saved Jobs" key="2">
               <Joblist jobData={this.state.savedJobData} isLoggedIn={this.props.isLoggedIn}/>
@@ -76,7 +84,6 @@ class Myprofile extends Component {
           </Tabs>
         }
       </div>
-
     );
   }
 }

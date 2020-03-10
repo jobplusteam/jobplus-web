@@ -1,67 +1,46 @@
 import React, {Component} from 'react';
-import {Form, Input} from 'antd';
+import {List} from 'antd';
 import '../styles/Profileview.css';
-import {URL_HOST} from '../constant';
-
 
 export class Profileview extends Component {
-  componentDidMount() {
-    const register_url = `${URL_HOST}${'/register'}?first_name='kang'`
-    fetch(register_url, {
-      method: 'GET',
-      headers: {},
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Failed to log information');
-    }).then((data) => {
-      console.log(data);
-    }).catch((e) => {
-      console.log("error");
-    })
-  }
 
   render() {
-    const layout = {
-      labelCol: {span: 8},
-      wrapperCol: {span: 16},
-    };
-
-    const validateMessages = {
-      required: 'This field is required!',
-      types: {
-        email: 'Not a validate email!',
-        number: 'Not a validate number!',
-      },
-      number: {
-        range: 'Must be between ${min} and ${max}',
-      },
-    };
-    const onFinish = values => {
-      console.log(values);
-    };
-    let index = 1;
+    const interests = this.props.profileData.interests;
+    const full_name = [this.props.profileData.full_name];
+    const user_id = [this.props.profileData.user_id];
     return (
       <div className="profile-view">
-        <div className="profile-personInfo">
-          <h2 className="welcome">Welcome, xxx</h2>
-          <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-            <Form.Item name={['user', 'Username']} label="Username" rules={[{required: true}]}>
-              <Input defaultValue={"jiangkang"} disabled={true}/>
-            </Form.Item>
-            <Form.Item name={['user', 'Firstname']} label="Firstname" rules={[{required: true}]}>
-              <Input defaultValue={"kang"} disabled={true}/>
-            </Form.Item>
-            <Form.Item name={['user', 'Lastname']} label="Lastname">
-              <Input defaultValue={"jiang"} disabled={true}/>
-            </Form.Item>
-            <Form.Item name={['user', 'Interest']} label="Interest">
-              <Input defaultValue={"jiang"} disabled={true}/>
-            </Form.Item>
-            <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
-            </Form.Item>
-          </Form>
+        <div className="profile-form">
+          <h3 style={{marginBottom: 16}}>Full Name</h3>
+          <List
+            bordered
+            dataSource={full_name}
+            renderItem={item => (
+              <List.Item className="list-item">
+                {item}
+              </List.Item>
+            )}
+          />
+          <h3 style={{marginBottom: 16}}>User ID</h3>
+          <List
+            bordered
+            dataSource={user_id}
+            renderItem={item => (
+              <List.Item>
+                {item}
+              </List.Item>
+            )}
+          />
+          <h3 style={{marginBottom: 16}}>Interests</h3>
+          <List
+            bordered
+            dataSource={interests}
+            renderItem={item => (
+              <List.Item>
+                {item}
+              </List.Item>
+            )}
+          />
         </div>
       </div>
     );
