@@ -65,7 +65,7 @@ class Myprofile extends Component {
         <h2 className="welcome">Welcome {localStorage.getItem("full_name")}</h2>
         {this.state.isLoading ?
           // <div className="loading">Fetching data</div>
-          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey}>
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} className="profile-tabs">
             <TabPane tab="My Profile" key="1" className="profile-tabs1">
               Fetching data...
             </TabPane>
@@ -74,7 +74,7 @@ class Myprofile extends Component {
             </TabPane>
           </Tabs>
           :
-          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey}>
+          <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} className="profile-tabs">
             <TabPane tab="My Profile" key="1">
               <Profileview profileData={this.state.profileData}/>
             </TabPane>
