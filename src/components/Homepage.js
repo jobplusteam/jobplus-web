@@ -175,7 +175,6 @@ class Homepage extends Component {
       this.setState({
         message: "Failed to fetch job data! Please Refresh the Page!"
       });
-      //console.log(this.props.message)
     }, 8000)
   }
 
