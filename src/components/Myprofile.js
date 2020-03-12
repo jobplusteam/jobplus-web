@@ -62,7 +62,7 @@ class Myprofile extends Component {
   render() {
     return (
       <div className="my-profile">
-        <h2 className="welcome">Welcome {localStorage.getItem("full_name")}</h2>
+        <h1 className="welcome">Welcome, {localStorage.getItem("full_name")}</h1>
         {this.state.isLoading ?
           // <div className="loading">Fetching data</div>
           <Tabs onChange={this.callback} type="card" activeKey={this.state.activeKey} className="profile-tabs">

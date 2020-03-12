@@ -3,12 +3,6 @@ import {List} from 'antd';
 import "../styles/Joblist.css";
 import Jobview from "./Jobview"
 
-/**
- * props needed:
- * 1. jobData -> json array object data
- * 2. tabName -> which tab the data is from?
- *      ("Nearby", "Recommend", "Searched", "Applied", "Liked")
- */
 class Joblist extends Component {
   state = {
     item: this.props.jobData,
@@ -25,7 +19,6 @@ class Joblist extends Component {
     this.setState({
       item: this.props.jobData[0]
     })
-    //console.log(this.props.jobData);
   }
 
   componentWillReceiveProps() {
@@ -35,7 +28,6 @@ class Joblist extends Component {
       })
     }, 1)
   }
-
 
   render() {
     const tab = this.props.tabName;

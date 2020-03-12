@@ -17,9 +17,13 @@ class Loading extends Component {
   }
 
   componentDidMount() {
-    if (this.props.isSearched) {
+    if (this.props.isSearched && this.props.isLoggedIn) {
       this.setState({
         activeKey: '3'
+      })
+    } else if (this.props.isSearched && !this.props.isLoggedIn) {
+      this.setState({
+        activeKey: '2'
       })
     }
   }
@@ -44,7 +48,7 @@ class Loading extends Component {
             <TabPane tab="Nearby Jobs" key="1" className="loading-page1">
               {this.props.message}
             </TabPane>
-            <TabPane tab="Searched Jobs" key="3" className="loading-page3">
+            <TabPane tab="Searched Jobs" key="2" className="loading-page3">
               {this.props.message}
             </TabPane>
           </Tabs>

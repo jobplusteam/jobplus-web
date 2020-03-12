@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import logo from '../logo.svg';
+import logo from "../assets/logo.svg"
 import {Icon} from 'antd';
 import {Link} from 'react-router-dom';
 import '../styles/TopBar.css';

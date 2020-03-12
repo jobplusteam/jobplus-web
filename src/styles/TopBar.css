@@ -2,19 +2,15 @@
     float: left;
     height: 60px;
     pointer-events: none;
+    margin-left: 10px;
 }
 
 .App-title {
-    color: #61dafb;
+    color: #f4ea2a;
     font-size: 24px;
     line-height: 60px;
     float: left;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+    margin-left: 10px;
 }
 
 .App-header {
@@ -24,15 +20,6 @@
     color: white;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .home,
 .profile,
 .login,
@@ -40,5 +27,20 @@
     float: right;
     line-height: 60px;
     padding-right: 20px;
-    font-size: 16px;
+    font-size: 0.7em;
+    color: #f4ea2a;
+}
+
+.home:hover {
+    color: #178fff;
+}
+
+.profile:hover {
+    color: #178fff;
+}
+.login:hover {
+    color: #178fff;
+}
+.logout:hover {
+    color: #178fff;
 }

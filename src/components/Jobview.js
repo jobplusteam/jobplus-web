@@ -27,7 +27,7 @@ class Jobview extends Component {
           message.error(`${data.result} ${data.message}`);
         }
       }).catch((error) => {
-        message.error("Save job error!")
+      message.error("Save job error!")
       console.log(error);
     });
 

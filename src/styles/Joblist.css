@@ -26,9 +26,6 @@
     border-bottom: 1px solid gray;
 }
 
-.job-item .active {
-    background-color: #61dafb;
-}
 .job-item .ant-list-item-meta{
     text-align: left;
 
