@@ -12,9 +12,13 @@ class TabContainer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.isSearched) {
+    if (this.props.isSearched && this.props.isLoggedIn) {
       this.setState({
         activeKey: '3'
+      })
+    } else if (this.props.isSearched && !this.props.isLoggedIn) {
+      this.setState({
+        activeKey: '2'
       })
     }
   }

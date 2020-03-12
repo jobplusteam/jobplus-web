@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu, Dropdown, Icon, message} from 'antd';
+import {Menu, Dropdown, Icon} from 'antd';
 import "../styles/Filter.css"
 import {FULL_OR_INTERN, FULL_TIME_ONLY} from "../constant"
 
