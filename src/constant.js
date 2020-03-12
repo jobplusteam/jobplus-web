@@ -3,15 +3,15 @@ import {Select} from "antd"
 
 const {Option} = Select;
 export const REGISTER_JOB_SELECTION = [
-  <Option key="Full-stack Engineer"> full stack Engineer </Option>,
+  <Option key="java"> java </Option>,
+  <Option key="c++"> c++ </Option>,
+  <Option key="python"> python </Option>,
+  <Option key="machine learning"> machine learning </Option>,
+  <Option key="cloud computing"> cloud computing </Option>,
+  <Option key="front end developer"> front end developer </Option>,
+  <Option key="back end developer"> back end developer </Option>,
+  <Option key="Full-stack Engineer"> full stack engineer </Option>,
   <Option key="Account Executive"> account executive </Option>,
-  <Option key="Machine Learning Engineer"> machine learning engineer </Option>,
-  <Option key="Software Engineer"> software engineer </Option>,
-  <Option key="Front-End Web Developer"> front end developer </Option>,
-  <Option key="Algorithm Engineer"> algorithm engineer </Option>,
-  <Option key="Backend Web Developer"> back end developer </Option>,
-  <Option key="Python Developer"> python developer </Option>,
-  <Option key="Lawyer"> lawyer </Option>,
   <Option key="Human Resource"> human resource </Option>,
 ];
 

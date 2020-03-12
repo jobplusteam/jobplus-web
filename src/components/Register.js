@@ -167,11 +167,11 @@ class RegistrationForm extends Component {
               ],
             })(<Input/>)}
           </Form.Item>
-          <Form.Item label="Job Description">
+          <Form.Item label="Interests">
             {getFieldDecorator('interests', {
               rules: [
                 {
-                  required: false,
+                  required: true,
                   message: 'Please choose your interests!',
                 },
               ],
@@ -179,7 +179,7 @@ class RegistrationForm extends Component {
               <Select
                 mode="multiple"
                 style={{width: '100%'}}
-                placeholder="Please select"
+                placeholder="What jobs are you interested in?"
                 onChange={this.handleChange}
               >
                 {REGISTER_JOB_SELECTION}
