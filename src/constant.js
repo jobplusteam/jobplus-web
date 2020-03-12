@@ -23,7 +23,7 @@ export const GEOLOCATION_OPTIONS = {
   maximumAge: 3600000,
   timeout: 27000,
 };
-export const URL_HOST = 'http://localhost:8080/Jobplus';
+export const URL_HOST = 'http://18.144.167.212:8080/Jobplus-server';
 export const NEARBY = '/nearby';
 export const SEARCH = '/search';
 export const PROFILE = '/profile';
